@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOS Excel 2019 Associate (MO-200) - Trainer Guide</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 3em;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .search-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            width: 0%;
+            transition: width 1s ease;
+            border-radius: 4px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .module-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent-color, #667eea), var(--accent-color-dark, #764ba2));
+        }
+
+        .module-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .module-card.worksheets { --accent-color: #4facfe; --accent-color-dark: #00f2fe; }
+        .module-card.data { --accent-color: #43e97b; --accent-color-dark: #38f9d7; }
+        .module-card.tables { --accent-color: #fa709a; --accent-color-dark: #fee140; }
+        .module-card.formulas { --accent-color: #a8edea; --accent-color-dark: #fed6e3; }
+        .module-card.charts { --accent-color: #ff9a9e; --accent-color-dark: #fecfef; }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .module-icon {
+            font-size: 2.5em;
+            margin-right: 15px;
+            color: var(--accent-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .topic-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .topic-item {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .topic-item:hover {
+            background: rgba(0, 0, 0, 0.05);
+            padding-left: 10px;
+            border-radius: 8px;
+        }
+
+        .topic-item:last-child {
+            border-bottom: none;
+        }
+
+        .topic-icon {
+            margin-right: 10px;
+            color: var(--accent-color);
+            opacity: 0.8;
+        }
+
+        .topic-text {
+            flex: 1;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        .topic-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .exercise-btn {
+            padding: 6px 12px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .exercise-btn:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .completion-badge {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            transition: all 0.3s ease;
+        }
+
+        .completion-badge.completed {
+            background: #4caf50;
+            color: white;
+        }
+
+        .floating-menu {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .fab {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 2% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover { color: #667eea; }
+
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .filter-tab:hover:not(.active) {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+        }
+
+        /* Exercise Modal Styles */
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .exercise-title {
+            font-size: 1.8em;
+            color: #333;
+            margin: 0;
+        }
+
+        .exercise-score {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #667eea;
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .answer-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .answer-option {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .answer-option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .answer-option.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .answer-option.correct {
+            border-color: #4caf50;
+            background: #4caf50;
+            color: white;
+        }
+
+        .answer-option.incorrect {
+            border-color: #f44336;
+            background: #f44336;
+            color: white;
+        }
+
+        .option-letter {
+            font-weight: bold;
+            margin-right: 12px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #667eea;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+        }
+
+        .answer-option.selected .option-letter,
+        .answer-option.correct .option-letter,
+        .answer-option.incorrect .option-letter {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .exercise-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .explanation {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .explanation.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .explanation-title {
+            color: #2e7d32;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .explanation-title i {
+            margin-right: 8px;
+        }
+
+        .practice-mode-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 25px;
+            background: #ccc;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: #667eea;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 21px;
+            height: 21px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(25px);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .modules-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 10px; }
+            .floating-menu { bottom: 20px; right: 20px; }
+            .modal-content { margin: 5% auto; padding: 20px; }
+            .exercise-actions { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-chart-line"></i> MOS Excel 2019 Associate</h1>
+            <p>Hướng dẫn đào tạo - MO-200 Certification</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="overallProgress"></div>
+            </div>
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Tìm kiếm chủ đề, kỹ năng hoặc tính năng Excel..." id="searchBox">
+        </div>
+
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">Tất cả</button>
+            <button class="filter-tab" data-filter="worksheets">Worksheets</button>
+            <button class="filter-tab" data-filter="data">Quản lý dữ liệu</button>
+            <button class="filter-tab" data-filter="tables">Bảng</button>
+            <button class="filter-tab" data-filter="formulas">Công thức</button>
+            <button class="filter-tab" data-filter="charts">Biểu đồ</button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalTopics">21</div>
+                <div class="stat-label">Chủ đề</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completedTopics">0</div>
+                <div class="stat-label">Hoàn thành</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="progressPercent">0%</div>
+                <div class="stat-label">Tiến độ</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="exerciseScore">0</div>
+                <div class="stat-label">Điểm TB</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Modules</div>
+            </div>
+        </div>
+
+        <div class="modules-grid" id="modulesGrid">
+            <div class="module-card worksheets" data-category="worksheets">
+                <div class="module-header">
+                    <div class="module-icon"><i class="fas fa-file-excel"></i></div>
+                    <div class="module-title">Quản lý Worksheets & Workbooks</div>
+                </div>
+                <ul class="topic-list">
+                    <li class="topic-item" data-topic="import-data">
+                        <i class="fas fa-download topic-icon"></i>
+                        <span class="topic-text">Import dữ liệu từ file .txt và .csv</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('import-data')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                    <li class="topic-item" data-topic="navigation">
+                        <i class="fas fa-search topic-icon"></i>
+                        <span class="topic-text">Tìm kiếm và điều hướng trong workbook</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('navigation')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                    <li class="topic-item" data-topic="formatting">
+                        <i class="fas fa-paint-brush topic-icon"></i>
+                        <span class="topic-text">Định dạng worksheets và thiết lập trang</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('formatting')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                    <li class="topic-item" data-topic="views">
+                        <i class="fas fa-eye topic-icon"></i>
+                        <span class="topic-text">Tùy chỉnh giao diện và chế độ xem</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('views')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                    <li class="topic-item" data-topic="collaboration">
+                        <i class="fas fa-users topic-icon"></i>
+                        <span class="topic-text">Cấu hình cho cộng tác và chia sẻ</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('collaboration')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="module-card data" data-category="data">
+                <div class="module-header">
+                    <div class="module-icon"><i class="fas fa-database"></i></div>
+                    <div class="module-title">Quản lý Cells & Ranges</div>
+                </div>
+                <ul class="topic-list">
+                    <li class="topic-item" data-topic="manipulation">
+                        <i class="fas fa-edit topic-icon"></i>
+                        <span class="topic-text">Thao tác dữ liệu với Auto Fill và Paste Special</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('manipulation')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                    <li class="topic-item" data-topic="cell-formatting">
+                        <i class="fas fa-palette topic-icon"></i>
+                        <span class="topic-text">Định dạng cells và merge/unmerge</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('cell-formatting')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                    <li class="topic-item" data-topic="named-ranges">
+                        <i class="fas fa-tag topic-icon"></i>
+                        <span class="topic-text">Tạo và sử dụng Named Ranges</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('named-ranges')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                    <li class="topic-item" data-topic="visual-summary">
+                        <i class="fas fa-chart-bar topic-icon"></i>
+                        <span class="topic-text">Sparklines và Conditional Formatting</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('visual-summary')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="module-card tables" data-category="tables">
+                <div class="module-header">
+                    <div class="module-icon"><i class="fas fa-table"></i></div>
+                    <div class="module-title">Quản lý Tables</div>
+                </div>
+                <ul class="topic-list">
+                    <li class="topic-item" data-topic="table-creation">
+                        <i class="fas fa-plus topic-icon"></i>
+                        <span class="topic-text">Tạo và định dạng Excel Tables</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('table-creation')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                    <li class="topic-item" data-topic="table-modification">
+                        <i class="fas fa-wrench topic-icon"></i>
+                        <span class="topic-text">Thêm/xóa rows, columns và Total rows</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('table-modification')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                    <li class="topic-item" data-topic="filter-sort">
+                        <i class="fas fa-filter topic-icon"></i>
+                        <span class="topic-text">Lọc và sắp xếp dữ liệu trong tables</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('filter-sort')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="module-card formulas" data-category="formulas">
+                <div class="module-header">
+                    <div class="module-icon"><i class="fas fa-calculator"></i></div>
+                    <div class="module-title">Formulas & Functions</div>
+                </div>
+                <ul class="topic-list">
+                    <li class="topic-item" data-topic="references">
+                        <i class="fas fa-link topic-icon"></i>
+                        <span class="topic-text">References: Relative, Absolute, Mixed</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('references')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                    <li class="topic-item" data-topic="math-functions">
+                        <i class="fas fa-plus-circle topic-icon"></i>
+                        <span class="topic-text">Functions: SUM, AVERAGE, MAX, MIN, COUNT</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('math-functions')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                    <li class="topic-item" data-topic="logical-functions">
+                        <i class="fas fa-code-branch topic-icon"></i>
+                        <span class="topic-text">Logical Functions: IF, COUNTIF, SUMIF</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('logical-functions')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                    <li class="topic-item" data-topic="text-functions">
+                        <i class="fas fa-font topic-icon"></i>
+                        <span class="topic-text">Text Functions: LEFT, RIGHT, MID, CONCAT</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('text-functions')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="module-card charts" data-category="charts">
+                <div class="module-header">
+                    <div class="module-icon"><i class="fas fa-chart-pie"></i></div>
+                    <div class="module-title">Quản lý Charts</div>
+                </div>
+                <ul class="topic-list">
+                    <li class="topic-item" data-topic="chart-creation">
+                        <i class="fas fa-plus-square topic-icon"></i>
+                        <span class="topic-text">Tạo charts và chart sheets</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('chart-creation')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                    <li class="topic-item" data-topic="chart-modification">
+                        <i class="fas fa-edit topic-icon"></i>
+                        <span class="topic-text">Thêm data series và switch row/column</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('chart-modification')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                    <li class="topic-item" data-topic="chart-formatting">
+                        <i class="fas fa-brush topic-icon"></i>
+                        <span class="topic-text">Định dạng charts: layouts, styles, elements</span>
+                        <div class="topic-actions">
+                            <button class="exercise-btn" onclick="openExercise('chart-formatting')">Bài tập</button>
+                            <div class="completion-badge"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-menu">
+        <button class="fab" onclick="openModal()">
+            <i class="fas fa-info"></i>
+        </button>
+        <button class="fab" onclick="openResultsModal()" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+            <i class="fas fa-chart-bar"></i>
+        </button>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('infoModal')">&times;</span>
+            <h2>Hướng dẫn sử dụng</h2>
+            <p><strong>Dành cho Trainer:</strong></p>
+            <ul style="margin: 20px 0; padding-left: 20px;">
+                <li>Click vào từng chủ đề để đánh dấu hoàn thành</li>
+                <li>Sử dụng nút "Bài tập" để mở bài tập thực hành cho từng chủ đề</li>
+                <li>Chuyển đổi giữa chế độ học tập và kiểm tra trong bài tập</li>
+                <li>Sử dụng thanh tìm kiếm để nhanh chóng tìm nội dung</li>
+                <li>Lọc theo module bằng các tab phía trên</li>
+                <li>Theo dõi tiến độ qua thanh progress và thống kê</li>
+                <li>Xem kết quả bài tập qua nút biểu đồ (màu xanh)</li>
+            </ul>
+            <p><strong>Mục tiêu khóa học:</strong></p>
+            <p>Chuẩn bị học viên cho kỳ thi MOS Excel 2019 Associate (MO-200) với đầy đủ kỹ năng cần thiết.</p>
+        </div>
+    </div>
+
+    <!-- Exercise Modal -->
+    <div id="exerciseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('exerciseModal')">&times;</span>
+            <div class="exercise-header">
+                <h2 class="exercise-title" id="exerciseTitle">Bài tập thực hành</h2>
+                <div class="exercise-score" id="exerciseScoreDisplay">0/0</div>
+            </div>
+            
+            <div class="practice-mode-toggle">
+                <span>Chế độ học tập:</span>
+                <div class="toggle-switch" id="practiceToggle" onclick="togglePracticeMode()">
+                    <div class="toggle-slider"></div>
+                </div>
+                <span id="modeLabel">Kiểm tra</span>
+            </div>
+
+            <div id="exerciseContent"></div>
+            
+            <div class="exercise-actions">
+                <button class="btn btn-secondary" onclick="closeModal('exerciseModal')">Đóng</button>
+                <div>
+                    <button class="btn btn-primary" id="submitBtn" onclick="submitExercise()">Nộp bài</button>
+                    <button class="btn btn-success" id="nextBtn" onclick="nextExercise()" style="display: none;">Tiếp theo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div id="resultsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('resultsModal')">&times;</span>
+            <h2>Kết quả bài tập</h2>
+            <div id="resultsContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let completedTopics = new Set();
+        let totalTopics = document.querySelectorAll('.topic-item').length;
+        let currentExercise = null;
+        let currentQuestionIndex = 0;
+        let selectedAnswers = {};
+        let exerciseResults = {};
+        let practiceMode = false;
+
+        // Exercise data
+        const exercises = {
+            'import-data': {
+                title: 'Import dữ liệu từ file .txt và .csv',
+                questions: [
+                    {
+                        question: 'Khi import file CSV vào Excel, tùy chọn nào cho phép bạn chỉ định ký tự phân cách?',
+                        options: ['Text Import Wizard', 'Data Connection Wizard', 'Power Query Editor', 'External Data Range'],
+                        correct: 0,
+                        explanation: 'Text Import Wizard cho phép bạn chỉ định delimiter (ký tự phân cách) như comma, semicolon, tab khi import file CSV.'
+                    },
+                    {
+                        question: 'Để import file text (.txt) với cột có chiều rộng cố định, bạn chọn tùy chọn nào?',
+                        options: ['Delimited', 'Fixed width', 'Tab delimited', 'Space delimited'],
+                        correct: 1,
+                        explanation: 'Fixed width được sử dụng khi dữ liệu text có các cột với chiều rộng cố định, không có ký tự phân cách.'
+                    },
+                    {
+                        question: 'Thao tác nào giúp refresh dữ liệu đã import từ external source?',
+                        options: ['Ctrl+R', 'F5', 'Ctrl+Alt+F5', 'Data > Refresh All'],
+                        correct: 3,
+                        explanation: 'Data > Refresh All hoặc Ctrl+Alt+F5 được sử dụng để refresh tất cả external data connections.'
+                    }
+                ]
+            },
+            'navigation': {
+                title: 'Tìm kiếm và điều hướng trong workbook',
+                questions: [
+                    {
+                        question: 'Phím tắt nào để mở hộp thoại Find & Replace?',
+                        options: ['Ctrl+F', 'Ctrl+H', 'Ctrl+G', 'Cả A và B'],
+                        correct: 3,
+                        explanation: 'Ctrl+F mở Find, Ctrl+H mở Replace, và Ctrl+G mở Go To dialog. Cả Ctrl+F và Ctrl+H đều mở Find & Replace dialog.'
+                    },
+                    {
+                        question: 'Để chuyển nhanh đến cell A1 từ bất kỳ vị trí nào, bạn sử dụng phím tắt:',
+                        options: ['Ctrl+Home', 'Ctrl+A', 'Home', 'Ctrl+G'],
+                        correct: 0,
+                        explanation: 'Ctrl+Home luôn đưa con trôn về cell A1 hoặc cell đầu tiên của used range.'
+                    },
+                    {
+                        question: 'Tính năng nào cho phép tìm kiếm trong toàn bộ workbook (tất cả worksheets)?',
+                        options: ['Find Options > Within: Sheet', 'Find Options > Within: Workbook', 'Find Options > Search: By Rows', 'Find Options > Look in: Values'],
+                        correct: 1,
+                        explanation: 'Trong Find dialog, tùy chọn "Within: Workbook" cho phép tìm kiếm trong tất cả worksheets của workbook.'
+                    }
+                ]
+            },
+            'formatting': {
+                title: 'Định dạng worksheets và thiết lập trang',
+                questions: [
+                    {
+                        question: 'Để thay đổi orientation của trang in từ Portrait sang Landscape, bạn vào menu nào?',
+                        options: ['File > Print > Settings', 'Page Layout > Orientation', 'View > Page Layout', 'Cả A và B'],
+                        correct: 3,
+                        explanation: 'Có thể thay đổi orientation trong Page Layout tab hoặc khi vào File > Print trong phần Settings.'
+                    },
+                    {
+                        question: 'Để đặt header/footer cho worksheet, bạn sử dụng tính năng nào?',
+                        options: ['Insert > Header & Footer', 'Page Layout > Print Titles', 'View > Page Layout', 'Page Layout > Page Setup'],
+                        correct: 0,
+                        explanation: 'Insert > Header & Footer cho phép thêm và chỉnh sửa header/footer cho worksheet.'
+                    },
+                    {
+                        question: 'Margin nào là khoảng cách từ lề trái của trang đến nội dung?',
+                        options: ['Top Margin', 'Bottom Margin', 'Left Margin', 'Header Margin'],
+                        correct: 2,
+                        explanation: 'Left Margin xác định khoảng cách từ lề trái của trang đến nội dung worksheet.'
+                    }
+                ]
+            },
+            'views': {
+                title: 'Tùy chỉnh giao diện và chế độ xem',
+                questions: [
+                    {
+                        question: 'Chế độ xem nào cho phép bạn thấy worksheet như khi in ra?',
+                        options: ['Normal View', 'Page Layout View', 'Page Break Preview', 'Full Screen'],
+                        correct: 1,
+                        explanation: 'Page Layout View hiển thị worksheet với margins, headers, footers như khi in thực tế.'
+                    },
+                    {
+                        question: 'Để ẩn gridlines trong worksheet, bạn bỏ tick ở đâu?',
+                        options: ['View > Gridlines', 'Page Layout > Gridlines', 'Home > Format', 'Cả A và B'],
+                        correct: 3,
+                        explanation: 'Có thể ẩn/hiện gridlines từ View tab hoặc Page Layout tab trong nhóm Sheet Options.'
+                    },
+                    {
+                        question: 'Freeze Panes được sử dụng để:',
+                        options: ['Cố định hàng/cột khi scroll', 'Chia màn hình thành nhiều phần', 'Zoom worksheet', 'Ẩn hàng/cột'],
+                        correct: 0,
+                        explanation: 'Freeze Panes cố định các hàng hoặc cột được chọn để chúng không bị cuộn khi scroll.'
+                    }
+                ]
+            },
+            'collaboration': {
+                title: 'Cấu hình cho cộng tác và chia sẻ',
+                questions: [
+                    {
+                        question: 'Để bảo vệ worksheet khỏi việc chỉnh sửa, bạn sử dụng tính năng nào?',
+                        options: ['Review > Protect Sheet', 'File > Info > Protect Workbook', 'Home > Format > Protection', 'View > Protect'],
+                        correct: 0,
+                        explanation: 'Review > Protect Sheet cho phép bảo vệ worksheet với password và các quyền hạn cụ thể.'
+                    },
+                    {
+                        question: 'Track Changes trong Excel giúp:',
+                        options: ['Theo dõi lịch sử chỉnh sửa', 'Tự động lưu file', 'Chia sẻ file', 'Đồng bộ với OneDrive'],
+                        correct: 0,
+                        explanation: 'Track Changes ghi lại tất cả các thay đổi được thực hiện trong workbook để có thể review sau.'
+                    },
+                    {
+                        question: 'Để cho phép nhiều người cùng chỉnh sửa file Excel, bạn cần:',
+                        options: ['Lưu file dạng .xlsx', 'Share workbook', 'Upload lên OneDrive/SharePoint', 'Cả B và C'],
+                        correct: 3,
+                        explanation: 'Có thể chia sẻ qua Share Workbook (phiên bản cũ) hoặc upload lên cloud services để collaboration realtime.'
+                    }
+                ]
+            },
+            'manipulation': {
+                title: 'Thao tác dữ liệu với Auto Fill và Paste Special',
+                questions: [
+                    {
+                        question: 'Auto Fill có thể tạo series nào sau đây?',
+                        options: ['Số tuần tự (1,2,3...)', 'Ngày tháng (1/1, 2/1, 3/1...)', 'Thứ trong tuần (Mon, Tue, Wed...)', 'Tất cả đều đúng'],
+                        correct: 3,
+                        explanation: 'Auto Fill có thể tạo nhiều loại series: số, ngày tháng, thứ, tháng, và custom lists.'
+                    },
+                    {
+                        question: 'Trong Paste Special, tùy chọn "Values" có tác dụng gì?',
+                        options: ['Paste cả format và values', 'Chỉ paste giá trị, không paste formula', 'Paste formula', 'Paste comments'],
+                        correct: 1,
+                        explanation: 'Paste Special > Values chỉ paste giá trị kết quả, không paste công thức hay formatting.'
+                    },
+                    {
+                        question: 'Để transpose dữ liệu (chuyển hàng thành cột), bạn sử dụng:',
+                        options: ['Paste Special > Transpose', 'Copy > Transpose', 'TRANSPOSE function', 'Cả A và C'],
+                        correct: 3,
+                        explanation: 'Có thể transpose bằng Paste Special > Transpose hoặc sử dụng hàm TRANSPOSE().'
+                    }
+                ]
+            },
+            'cell-formatting': {
+                title: 'Định dạng cells và merge/unmerge',
+                questions: [
+                    {
+                        question: 'Để format số thành dạng tiền tệ VND, bạn chọn:',
+                        options: ['Number > Currency', 'Number > Accounting', 'Custom format', 'Cả A và C'],
+                        correct: 3,
+                        explanation: 'Có thể dùng Currency format hoặc tạo custom format với ký hiệu ₫ hoặc VND.'
+                    },
+                    {
+                        question: 'Merge Cells có nhược điểm gì?',
+                        options: ['Làm mất dữ liệu trong cells khác', 'Khó sort và filter', 'Ảnh hưởng đến formulas', 'Tất cả đều đúng'],
+                        correct: 3,
+                        explanation: 'Merge cells có nhiều nhược điểm: mất dữ liệu, khó thao tác, ảnh hưởng formulas và functions.'
+                    },
+                    {
+                        question: 'Để căn giữa text trong cell theo cả chiều ngang và dọc:',
+                        options: ['Alignment > Center', 'Alignment > Middle Align', 'Alignment > Center + Middle Align', 'Format > Center'],
+                        correct: 2,
+                        explanation: 'Cần đặt cả Horizontal alignment = Center và Vertical alignment = Middle để căn giữa hoàn toàn.'
+                    }
+                ]
+            },
+            'named-ranges': {
+                title: 'Tạo và sử dụng Named Ranges',
+                questions: [
+                    {
+                        question: 'Lợi ích chính của Named Ranges là gì?',
+                        options: ['Formulas dễ đọc hơn', 'Dễ maintain khi thay đổi range', 'Có thể dùng trong nhiều sheets', 'Tất cả đều đúng'],
+                        correct: 3,
+                        explanation: 'Named Ranges giúp formulas dễ hiểu, dễ bảo trì, và có thể sử dụng xuyên suốt workbook.'
+                    },
+                    {
+                        question: 'Tên nào sau đây KHÔNG hợp lệ cho Named Range?',
+                        options: ['Sales_2023', 'Total Revenue', 'A1', 'MyData'],
+                        correct: 2,
+                        explanation: 'Tên A1 không hợp lệ vì trùng với cell reference. Tên không được bắt đầu bằng số và không có khoảng trắng (dùng underscore).'
+                    },
+                    {
+                        question: 'Để tạo Named Range, bạn có thể sử dụng:',
+                        options: ['Formulas > Define Name', 'Name Box', 'Formulas > Create from Selection', 'Tất cả đều đúng'],
+                        correct: 3,
+                        explanation: 'Có nhiều cách tạo Named Range: Define Name, gõ trực tiếp vào Name Box, hoặc Create from Selection.'
+                    }
+                ]
+            },
+            'visual-summary': {
+                title: 'Sparklines và Conditional Formatting',
+                questions: [
+                    {
+                        question: 'Sparklines là gì?',
+                        options: ['Biểu đồ nhỏ trong cell', 'Định dạng có điều kiện', 'Hàm Excel', 'Macro VBA'],
+                        correct: 0,
+                        explanation: 'Sparklines là các biểu đồ mini được hiển thị ngay trong cell để show trend của dữ liệu.'
+                    },
+                    {
+                        question: 'Loại Conditional Formatting nào highlight cells có giá trị cao nhất?',
+                        options: ['Data Bars', 'Color Scales', 'Top/Bottom Rules', 'Icon Sets'],
+                        correct: 2,
+                        explanation: 'Top/Bottom Rules cho phép highlight các cells có giá trị cao nhất, thấp nhất, hoặc above/below average.'
+                    },
+                    {
+                        question: 'Data Bars trong Conditional Formatting hiển thị:',
+                        options: ['Thanh màu theo tỷ lệ giá trị', 'Icon theo điều kiện', 'Màu nền gradient', 'Border có màu'],
+                        correct: 0,
+                        explanation: 'Data Bars hiển thị thanh màu có độ dài tỷ lệ với giá trị trong cell, giúp so sánh trực quan.'
+                    }
+                ]
+            },
+            'table-creation': {
+                title: 'Tạo và định dạng Excel Tables',
+                questions: [
+                    {
+                        question: 'Phím tắt để tạo Table từ data range là:',
+                        options: ['Ctrl+T', 'Ctrl+L', 'Alt+T', 'Cả A và B'],
+                        correct: 3,
+                        explanation: 'Cả Ctrl+T và Ctrl+L đều có thể tạo Table từ data range được chọn.'
+                    },
+                    {
+                        question: 'Lợi ích của Excel Table so với range thông thường:',
+                        options: ['Auto-expand khi thêm data', 'Built-in filtering', 'Structured references', 'Tất cả đều đúng'],
+                        correct: 3,
+                        explanation: 'Excel Tables có nhiều lợi ích: tự động mở rộng, filter sẵn có, structured references trong formulas.'
+                    },
+                    {
+                        question: 'Structured reference [@Column1] trong Table có nghĩa:',
+                        options: ['Toàn bộ Column1', 'Cell hiện tại trong Column1', 'Header của Column1', 'Row đầu tiên của Column1'],
+                        correct: 1,
+                        explanation: 'Ký hiệu @ trong structured reference đề cập đến cell trong cùng row với formula đang được viết.'
+                    }
+                ]
+            },
+            'table-modification': {
+                title: 'Thêm/xóa rows, columns và Total rows',
+                questions: [
+                    {
+                        question: 'Để thêm Total Row vào Table, bạn:',
+                        options: ['Table Tools > Design > Total Row', 'Right-click > Insert Total Row', 'Insert > Table > Total Row', 'Ctrl+Shift+T'],
+                        correct: 0,
+                        explanation: 'Table Tools Design tab có checkbox Total Row để bật/tắt dòng tổng cho Table.'
+                    },
+                    {
+                        question: 'Khi thêm data vào row ngay dưới Table, điều gì xảy ra?',
+                        options: ['Table tự động expand', 'Phải manually resize Table', 'Data không được nhận diện', 'Tạo Table mới'],
+                        correct: 0,
+                        explanation: 'Excel Tables tự động mở rộng khi bạn thêm data vào row hoặc column liền kề.'
+                    },
+                    {
+                        question: 'Trong Total Row, bạn có thể sử dụng functions nào?',
+                        options: ['SUM, AVERAGE, COUNT', 'MAX, MIN, STDEV', 'COUNTBLANK, VAR', 'Tất cả đều đúng'],
+                        correct: 3,
+                        explanation: 'Total Row cung cấp dropdown với nhiều functions: SUM, AVERAGE, COUNT, MAX, MIN, và nhiều hàm khác.'
+                    }
+                ]
+            },
+            'filter-sort': {
+                title: 'Lọc và sắp xếp dữ liệu trong tables',
+                questions: [
+                    {
+                        question: 'Custom AutoFilter cho phép bạn:',
+                        options: ['Filter theo một điều kiện', 'Filter theo hai điều kiện với AND/OR', 'Filter theo text wildcards', 'Cả B và C'],
+                        correct: 3,
+                        explanation: 'Custom AutoFilter hỗ trợ hai điều kiện với AND/OR operators và wildcards như * và ?.'
+                    },
+                    {
+                        question: 'Để sort Table theo nhiều cột, bạn sử dụng:',
+                        options: ['Data > Sort', 'Column header dropdown > Sort', 'Right-click > Sort', 'Tất cả đều được'],
+                        correct: 0,
+                        explanation: 'Data > Sort dialog cho phép thiết lập multiple sort levels với các cột và sort order khác nhau.'
+                    },
+                    {
+                        question: 'Wildcard * trong filter có nghĩa:',
+                        options: ['Một ký tự bất kỳ', 'Nhiều ký tự bất kỳ', 'Số bất kỳ', 'Ký tự đặc biệt'],
+                        correct: 1,
+                        explanation: 'Wildcard * đại diện cho nhiều ký tự bất kỳ, còn ? đại diện cho một ký tự bất kỳ.'
+                    }
+                ]
+            },
+            'references': {
+                title: 'Cell References: Relative, Absolute, Mixed',
+                questions: [
+                    {
+                        question: 'Công thức nào sử dụng absolute reference?',
+                        options: ['=A1+B1', '=$A$1+B1', '=A$1+$B1', '=SUM(A1:A10)'],
+                        correct: 1,
+                        explanation: '$A$1 là absolute reference - cả row và column đều được cố định bằng dấu $.'
+                    },
+                    {
+                        question: 'Khi copy công thức =A$1+$B2 từ cell C1 sang D2, kết quả sẽ là:',
+                        options: ['=B$1+$B3', '=B$1+$B2', '=A$1+$B3', '=B$2+$B3'],
+                        correct: 0,
+                        explanation: 'A thành B (column thay đổi), $1 giữ nguyên (row cố định), $B giữ nguyên (column cố định), 2 thành 3 (row thay đổi).'
+                    },
+                    {
+                        question: 'Mixed reference $A1 có nghĩa là:',
+                        options: ['Column A cố định, row 1 thay đổi', 'Column A thay đổi, row 1 cố định', 'Cả column và row đều cố định', 'Cả column và row đều thay đổi'],
+                        correct: 0,
+                        explanation: 'Trong $A1, dấu $ trước A có nghĩa column A được cố định, còn row 1 sẽ thay đổi khi copy formula.'
+                    }
+                ]
+            },
+            'math-functions': {
+                title: 'Hàm toán học: SUM, AVERAGE, MAX, MIN, COUNT',
+                questions: [
+                    {
+                        question: 'Hàm nào đếm số lượng cells chứa số trong range A1:A10?',
+                        options: ['=COUNT(A1:A10)', '=COUNTA(A1:A10)', '=COUNTIF(A1:A10)', '=SUM(A1:A10)'],
+                        correct: 0,
+                        explanation: 'COUNT đếm cells chứa số, COUNTA đếm cells không rỗng (bao gồm text), COUNTIF đếm theo điều kiện.'
+                    },
+                    {
+                        question: 'Để tính trung bình của các giá trị từ 10 đến 50 trong range A1:A20, công thức nào đúng?',
+                        options: ['=AVERAGE(A1:A20,">10","<50")', '=AVERAGEIFS(A1:A20,">=10",A1:A20,"<=50")', '=AVERAGEIF(A1:A20,">=10")+AVERAGEIF(A1:A20,"<=50")', '=AVERAGE(A1:A20)'],
+                        correct: 1,
+                        explanation: 'AVERAGEIFS cho phép sử dụng nhiều criteria để tính trung bình có điều kiện.'
+                    },
+                    {
+                        question: 'Kết quả của =MAX(10,5,20,MIN(30,15)) là:',
+                        options: ['30', '20', '15', '10'],
+                        correct: 1,
+                        explanation: 'MIN(30,15) = 15, sau đó MAX(10,5,20,15) = 20.'
+                    }
+                ]
+            },
+            'logical-functions': {
+                title: 'Hàm logic: IF, COUNTIF, SUMIF',
+                questions: [
+                    {
+                        question: 'Công thức =IF(A1>100,"High",IF(A1>50,"Medium","Low")) thực hiện chức năng gì?',
+                        options: ['Kiểm tra một điều kiện', 'Kiểm tra hai điều kiện', 'Kiểm tra ba mức độ', 'Tính tổng có điều kiện'],
+                        correct: 2,
+                        explanation: 'Đây là nested IF kiểm tra ba mức: >100 (High), >50 (Medium), còn lại (Low).'
+                    },
+                    {
+                        question: 'Để đếm số cells trong range A1:A10 có giá trị lớn hơn 50, công thức nào đúng?',
+                        options: ['=COUNTIF(A1:A10,>50)', '=COUNTIF(A1:A10,">50")', '=COUNT(A1:A10>50)', '=SUMIF(A1:A10,">50")'],
+                        correct: 1,
+                        explanation: 'COUNTIF sử dụng criteria dạng text trong dấu ngoặc kép: ">50".'
+                    },
+                    {
+                        question: 'Công thức =SUMIF(B1:B10,"Apple",C1:C10) có ý nghĩa:',
+                        options: ['Tính tổng range C1:C10', 'Tính tổng C1:C10 nếu B1:B10 chứa "Apple"', 'Đếm số lượng "Apple" trong B1:B10', 'Tìm vị trí của "Apple"'],
+                        correct: 1,
+                        explanation: 'SUMIF kiểm tra điều kiện trong range B1:B10, nếu thỏa mãn thì cộng giá trị tương ứng trong C1:C10.'
+                    }
+                ]
+            },
+            'text-functions': {
+                title: 'Text Functions: LEFT, RIGHT, MID, CONCAT',
+                questions: [
+                    {
+                        question: 'Công thức =LEFT("Excel 2019",5) trả về kết quả gì?',
+                        options: ['Excel', '2019', 'Excel 2019', 'Exce'],
+                        correct: 0,
+                        explanation: 'LEFT lấy 5 ký tự từ bên trái của chuỗi "Excel 2019", kết quả là "Excel".'
+                    },
+                    {
+                        question: 'Để lấy 3 ký tự giữa từ vị trí thứ 4 trong chuỗi "Microsoft", bạn dùng:',
+                        options: ['=MID("Microsoft",4,3)', '=MID("Microsoft",3,4)', '=MIDDLE("Microsoft",4,3)', '=CENTER("Microsoft",4,3)'],
+                        correct: 0,
+                        explanation: 'MID(text, start_position, length) - MID("Microsoft",4,3) lấy 3 ký tự từ vị trí 4: "ros".'
+                    },
+                    {
+                        question: 'CONCAT function khác gì so với & operator?',
+                        options: ['Không có khác biệt', 'CONCAT nhanh hơn', 'CONCAT có thể nối ranges', 'CONCAT chỉ nối text'],
+                        correct: 2,
+                        explanation: 'CONCAT có thể nối toàn bộ range cells, trong khi & operator chỉ nối từng cell riêng lẻ.'
+                    }
+                ]
+            },
+            'chart-creation': {
+                title: 'Tạo charts và chart sheets',
+                questions: [
+                    {
+                        question: 'Phím tắt để tạo chart từ data được chọn là:',
+                        options: ['Alt+F1', 'F11', 'Ctrl+F1', 'Cả A và B'],
+                        correct: 3,
+                        explanation: 'Alt+F1 tạo embedded chart, F11 tạo chart sheet. Cả hai đều tạo chart từ data được chọn.'
+                    },
+                    {
+                        question: 'Chart type nào phù hợp nhất để hiển thị xu hướng theo thời gian?',
+                        options: ['Pie Chart', 'Line Chart', 'Bar Chart', 'Doughnut Chart'],
+                        correct: 1,
+                        explanation: 'Line Chart là lựa chọn tốt nhất để hiển thị trends và changes over time.'
+                    },
+                    {
+                        question: 'Để chuyển chart từ embedded sang chart sheet:',
+                        options: ['Chart Tools > Design > Move Chart', 'Right-click > Move Chart', 'Cut and Paste vào sheet mới', 'Cả A và B'],
+                        correct: 3,
+                        explanation: 'Có thể move chart qua Chart Tools Design tab hoặc right-click context menu.'
+                    }
+                ]
+            },
+            'chart-modification': {
+                title: 'Thêm data series và switch row/column',
+                questions: [
+                    {
+                        question: 'Để thêm data series mới vào chart hiện có:',
+                        options: ['Chart Tools > Design > Select Data', 'Right-click chart > Select Data', 'Drag data range vào chart', 'Tất cả đều đúng'],
+                        correct: 3,
+                        explanation: 'Có thể thêm data series qua Select Data dialog hoặc drag-drop data range trực tiếp vào chart.'
+                    },
+                    {
+                        question: 'Switch Row/Column có tác dụng gì?',
+                        options: ['Đổi chỗ data và categories', 'Xoay chart 90 độ', 'Thay đổi chart type', 'Sắp xếp lại data'],
+                        correct: 0,
+                        explanation: 'Switch Row/Column đổi chỗ giữa data series và categories trên chart.'
+                    },
+                    {
+                        question: 'Để thay đổi data range của chart:',
+                        options: ['Resize bằng cách kéo corners', 'Select Data > Edit Series', 'Thay đổi trực tiếp trong formula bar', 'Cả B và C'],
+                        correct: 3,
+                        explanation: 'Có thể thay đổi data range qua Select Data dialog hoặc edit trực tiếp trong formula bar của chart.'
+                    }
+                ]
+            },
+            'chart-formatting': {
+                title: 'Định dạng charts: layouts, styles, elements',
+                questions: [
+                    {
+                        question: 'Chart Elements button (+ icon) cho phép bạn:',
+                        options: ['Thêm/bỏ titles, legends, data labels', 'Thay đổi chart type', 'Format colors', 'Add animations'],
+                        correct: 0,
+                        explanation: 'Chart Elements button cho phép thêm/bỏ các thành phần như title, legend, data labels, gridlines.'
+                    },
+                    {
+                        question: 'Để format individual data point trong series:',
+                        options: ['Click 1 lần để chọn series, click 2 lần để chọn point', 'Right-click > Format Data Point', 'Chart Tools > Format tab', 'Cả A và B'],
+                        correct: 3,
+                        explanation: 'Double-click để chọn specific data point, sau đó có thể format qua context menu hoặc Format pane.'
+                    },
+                    {
+                        question: 'Chart Styles trong Chart Tools Design tab cho phép:',
+                        options: ['Thay đổi colors và effects nhanh', 'Thay đổi chart type', 'Thêm data series', 'Move chart location'],
+                        correct: 0,
+                        explanation: 'Chart Styles cung cấp predefined color schemes và visual effects để format chart nhanh chóng.'
+                    }
+                ]
+            }
+        };
+
+        // Initialize
+        document.getElementById('totalTopics').textContent = totalTopics;
+        updateProgress();
+
+        // Topic completion toggle
+        document.querySelectorAll('.topic-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (e.target.classList.contains('exercise-btn')) return;
+                
+                const badge = this.querySelector('.completion-badge');
+                const topicId = this.dataset.topic;
+                
+                if (completedTopics.has(topicId)) {
+                    completedTopics.delete(topicId);
+                    badge.classList.remove('completed');
+                    badge.innerHTML = '';
+                } else {
+                    completedTopics.add(topicId);
+                    badge.classList.add('completed');
+                    badge.innerHTML = '<i class="fas fa-check"></i>';
+                }
+                
+                updateProgress();
+            });
+        });
+
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const topics = document.querySelectorAll('.topic-item');
+            
+            topics.forEach(topic => {
+                const text = topic.querySelector('.topic-text').textContent.toLowerCase();
+                const moduleCard = topic.closest('.module-card');
+                
+                if (text.includes(searchTerm)) {
+                    topic.style.display = 'flex';
+                    moduleCard.style.display = 'block';
+                } else {
+                    topic.style.display = 'none';
+                }
+            });
+
+            document.querySelectorAll('.module-card').forEach(card => {
+                const visibleTopics = card.querySelectorAll('.topic-item[style*="flex"]').length;
+                
+                if (searchTerm === '') {
+                    card.style.display = 'block';
+                } else if (visibleTopics === 0) {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                const modules = document.querySelectorAll('.module-card');
+                
+                modules.forEach(module => {
+                    if (filter === 'all' || module.dataset.category === filter) {
+                        module.style.display = 'block';
+                    } else {
+                        module.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Exercise functions
+        function openExercise(topicId) {
+            if (!exercises[topicId]) {
+                alert('Bài tập cho chủ đề này đang được cập nhật!');
+                return;
+            }
+
+            currentExercise = topicId;
+            currentQuestionIndex = 0;
+            selectedAnswers = {};
+            
+            document.getElementById('exerciseTitle').textContent = exercises[topicId].title;
+            document.getElementById('exerciseModal').style.display = 'block';
+            
+            renderExercise();
+        }
+
+        function renderExercise() {
+            const exercise = exercises[currentExercise];
+            const content = document.getElementById('exerciseContent');
+            
+            content.innerHTML = exercise.questions.map((q, index) => `
+                <div class="question-card">
+                    <div class="question-number">Câu ${index + 1}/${exercise.questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="answer-options">
+                        ${q.options.map((option, optIndex) => `
+                            <div class="answer-option" data-question="${index}" data-answer="${optIndex}">
+                                <div class="option-letter">${String.fromCharCode(65 + optIndex)}</div>
+                                <span>${option}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="explanation" id="explanation-${index}">
+                        <div class="explanation-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Giải thích:
+                        </div>
+                        <p>${q.explanation}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Add click handlers for answers
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionIndex = parseInt(this.dataset.question);
+                    const answerIndex = parseInt(this.dataset.answer);
+                    
+                    // Remove previous selection for this question
+                    document.querySelectorAll(`[data-question="${questionIndex}"]`).forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Add selection to clicked option
+                    this.classList.add('selected');
+                    selectedAnswers[questionIndex] = answerIndex;
+                    
+                    // Show explanation in practice mode
+                    if (practiceMode) {
+                        showQuestionResult(questionIndex);
+                    }
+                });
+            });
+
+            updateExerciseScore();
+        }
+
+        function showQuestionResult(questionIndex) {
+            const exercise = exercises[currentExercise];
+            const question = exercise.questions[questionIndex];
+            const selectedAnswer = selectedAnswers[questionIndex];
+            
+            // Mark correct/incorrect answers
+            document.querySelectorAll(`[data-question="${questionIndex}"]`).forEach((option, index) => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedAnswer && selectedAnswer !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            // Show explanation
+            document.getElementById(`explanation-${questionIndex}`).classList.add('show');
+        }
+
+        function submitExercise() {
+            const exercise = exercises[currentExercise];
+            let correctCount = 0;
+            
+            exercise.questions.forEach((question, index) => {
+                const selectedAnswer = selectedAnswers[index];
+                if (selectedAnswer === question.correct) {
+                    correctCount++;
+                }
+                
+                showQuestionResult(index);
+            });
+            
+            const score = Math.round((correctCount / exercise.questions.length) * 100);
+            exerciseResults[currentExercise] = {
+                score: score,
+                correct: correctCount,
+                total: exercise.questions.length,
+                timestamp: new Date()
+            };
+            
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            
+            updateExerciseScore();
+            
+            // Mark topic as completed if score >= 70%
+            if (score >= 70) {
+                const topicElement = document.querySelector(`[data-topic="${currentExercise}"]`);
+                const badge = topicElement.querySelector('.completion-badge');
+                completedTopics.add(currentExercise);
+                badge.classList.add('completed');
+                badge.innerHTML = '<i class="fas fa-check"></i>';
+                updateProgress();
+            }
+        }
+
+        function nextExercise() {
+            // Find next topic with exercises
+            const topics = Object.keys(exercises);
+            const currentIndex = topics.indexOf(currentExercise);
+            const nextTopic = topics[currentIndex + 1];
+            
+            if (nextTopic) {
+                openExercise(nextTopic);
+            } else {
+                alert('Bạn đã hoàn thành tất cả bài tập! Chúc mừng!');
+                closeModal('exerciseModal');
+            }
+        }
+
+        function togglePracticeMode() {
+            practiceMode = !practiceMode;
+            const toggle = document.getElementById('practiceToggle');
+            const label = document.getElementById('modeLabel');
+            
+            if (practiceMode) {
+                toggle.classList.add('active');
+                label.textContent = 'Học tập';
+            } else {
+                toggle.classList.remove('active');
+                label.textContent = 'Kiểm tra';
+            }
+            
+            // Re-render exercise
+            renderExercise();
+        }
+
+        function updateExerciseScore() {
+            const completed = Object.keys(exerciseResults).length;
+            const total = Object.keys(exercises).length;
+            
+            document.getElementById('exerciseScoreDisplay').textContent = `${Object.keys(selectedAnswers).length}/${exercises[currentExercise]?.questions.length || 0}`;
+            
+            if (completed > 0) {
+                const avgScore = Object.values(exerciseResults).reduce((sum, result) => sum + result.score, 0) / completed;
+                document.getElementById('exerciseScore').textContent = Math.round(avgScore);
+            }
+        }
+
+        function openResultsModal() {
+            const content = document.getElementById('resultsContent');
+            
+            if (Object.keys(exerciseResults).length === 0) {
+                content.innerHTML = '<p style="text-align: center; color: #666;">Chưa có kết quả bài tập nào.</p>';
+            } else {
+                content.innerHTML = `
+                    <div style="display: grid; gap: 20px;">
+                        ${Object.entries(exerciseResults).map(([topicId, result]) => `
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid ${result.score >= 70 ? '#4caf50' : '#ff9800'};">
+                                <h3 style="margin-bottom: 10px;">${exercises[topicId].title}</h3>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Điểm: <strong>${result.score}%</strong> (${result.correct}/${result.total})</span>
+                                    <span style="color: #666; font-size: 0.9em;">${result.timestamp.toLocaleDateString('vi-VN')}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            document.getElementById('resultsModal').style.display = 'block';
+        }
+
+        function updateProgress() {
+            const completed = completedTopics.size;
+            const percentage = Math.round((completed / totalTopics) * 100);
+            
+            document.getElementById('completedTopics').textContent = completed;
+            document.getElementById('progressPercent').textContent = percentage + '%';
+            document.getElementById('overallProgress').style.width = percentage + '%';
+        }
+
+        function openModal() {
+            document.getElementById('infoModal').style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            
+            if (modalId === 'exerciseModal') {
+                document.getElementById('submitBtn').style.display = 'inline-block';
+                document.getElementById('nextBtn').style.display = 'none';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                updateProgress();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
